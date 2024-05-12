@@ -1,0 +1,26 @@
+<div class="login-container">
+    <form class="login-form" (ngSubmit)="login()">
+        <input [(ngModel)]="email" name="email" type="email" placeholder="Email" required />
+        <input [(ngModel)]="password" name="password" type="password" placeholder="Password" required />
+        <div class="buttons">
+            <button type="submit">Login</button>
+        </div>
+        <div class="buttons">
+            <button type="button" (click)="navigate('/signup')">Sign Up</button>
+        </div>
+        <!-- <div class="buttons">
+            <button type="button" routerLink="/signup">Sign Up</button>
+        </div> -->
+        <div *ngIf="errorMessage">
+            <p>{{errorMessage}}</p>
+        </div>
+    </form>
+
+</div>
+<div class="buttons">
+    <button type="button" (click)="loadDatabase()">Adatbázis feltöltés</button>
+    <button type="button" (click)="deleteDatabase()">Adatbázis törlés</button>
+</div>
+<div class="logo">
+    <img  src="/assets/logo.png" alt="logo">
+</div>

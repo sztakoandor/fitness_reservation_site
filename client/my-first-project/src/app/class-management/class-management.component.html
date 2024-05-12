@@ -1,0 +1,57 @@
+<div class="topnav">
+  <a class="active" (click)="navigate('/welcome')">Home</a>
+  <a (click)="navigate('/subscriptions')">Foglalásaim</a>
+  <a (click)="navigate('/calendar')">Fitnessz alkalmak</a>
+  <a *ngIf="isAdmin == 'true'" (click)="navigate('/user-management')">Felhasználók kezelése</a>
+  <a *ngIf="isAdmin == 'true'" (click)="navigate('/class-management')">Fitnessz órák kezelése</a>
+  <a style="float: right;" (click)="logout()">Kijelentkezés</a>
+</div> 
+<div class="table-container" *ngIf="classes && classes.length; else noClassesTemplate">
+  <table>
+      <thead>
+          <tr>
+              <th>Időpont</th>
+              <th>Típus</th>
+              <th>Leírás</th>
+              <th>Létszám</th>
+              <th>Törlés</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let class of classes">
+              <td>{{class.start}}</td>
+              <td>{{class.type}}</td>
+              <td>{{class.description}}</td>
+              <td>{{class.maxPeople}} / {{class.participants.length}}</td>
+              <td><button  type="button" (click) = "deleteClass(class.id)">Törlés</button></td>
+          </tr>
+      </tbody>  
+  </table>
+</div>
+<ng-template #noClassesTemplate>
+  <div class="subtext">
+    <p>Nincs meghirdetett fitnessz óra.</p>
+  </div>
+</ng-template>
+ <!-- A button to open the popup form -->
+ <button class="open-button" (click)="openForm()">Óra felvétel</button>
+ <!-- The form -->
+ <div class="form-popup" style="display: none;"  #classForm>
+  <form class="form-container" [formGroup]="makeClassForm" (ngSubmit)="classSubmit()">
+    <label for="start">Kezdés időpontja</label>
+    <input formControlName="start" type="datetime-local" placeholder="Kezdés dátuma" required id = "start"/>
+    <input formControlName="duration" type="number" placeholder="Tervezett hossz (óra)" required/>
+    <input formControlName="maxPeople" type="number" placeholder="Férőhelyek" required/>
+    <input formControlName="description" type="text" placeholder="Leírás" required/>
+    <input type="radio" formControlName="difficulty" value="Kezdő" /> Kezdő
+    <input type="radio" formControlName="difficulty" value="Haladó" /> Haladó
+    <input type="radio" formControlName="difficulty" value="Nehéz" /> Nehéz
+    <input formControlName="type" type="text" placeholder="Óra típusa (pl.: Aerobic)" required/>
+    <div class="buttons">
+      <button type="submit">Létrehozás</button>
+    </div>
+   </form>
+</div> 
+<div class="logo">
+  <img  src="/assets/logo.png" alt="logo">
+</div>

@@ -1,0 +1,45 @@
+<div class="topnav">
+    <a class="active" (click)="navigate('/welcome')">Home</a>
+    <a (click)="navigate('/subscriptions')">Foglalásaim</a>
+    <a (click)="navigate('/calendar')">Fitnessz alkalmak</a>
+    <a *ngIf="isAdmin == 'true'" (click)="navigate('/user-management')">Felhasználók kezelése</a>
+    <a *ngIf="isAdmin == 'true'" (click)="navigate('/class-management')">Fitnessz órák kezelése</a>
+    <a style="float: right;" (click)="logout()">Kijelentkezés</a>
+</div> 
+<div class="table-container" *ngIf="users && users.length; else noUsersTemplate">
+    <table>
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Nickname</th>
+                <th>Admin?</th>
+                <th>Promote</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+                <td>{{user.email}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.address}}</td>
+                <td>{{user.nickname}}</td>
+                <td>{{user.admin}}</td>
+                <td><button  type="button" (click) = "changeAdmin(user.email, true)" *ngIf="user.admin == false; else subButtonTemplate">Make Admin</button></td>
+                <ng-template #subButtonTemplate>
+                <td><button  type="button" (click) = "changeAdmin(user.email, false)">Remove Admin</button></td>
+                </ng-template>
+                <td><button  type="button" (click) = "deleteUser(user.email)" >Delete account</button></td>
+            </tr>   
+        </tbody>
+    </table>
+</div>
+<ng-template #noUsersTemplate>
+    <div class="subtext">
+        <p>No users available.</p>
+    </div>
+</ng-template>
+<div class="logo">
+    <img  src="/assets/logo.png" alt="logo">
+</div>

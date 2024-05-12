@@ -1,0 +1,44 @@
+<div class="topnav">
+    <a class="active" (click)="navigate('/welcome')">Home</a>
+    <a (click)="navigate('/subscriptions')">Foglalásaim</a>
+    <a (click)="navigate('/calendar')">Fitnessz alkalmak</a>
+    <a *ngIf="isAdmin == 'true'" (click)="navigate('/user-management')">Felhasználók kezelése</a>
+    <a *ngIf="isAdmin == 'true'" (click)="navigate('/class-management')">Fitnessz órák kezelése</a>
+    <a style="float: right;" (click)="logout()">Kijelentkezés</a>
+</div> 
+<div class="table-container" *ngIf="classes && classes.length; else noClassesTemplate">
+  <table>
+      <thead>
+          <tr>
+              <th>Időpont</th>
+              <th>Típus</th>
+              <th>Leírás</th>
+              <th>Létszám</th>
+              <th>Feliratkozás</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let class of classes">
+              <td>{{class.start}}</td>
+              <td>{{class.type}}</td>
+              <td>{{class.description}}</td>
+              <td>{{class.maxPeople}} / {{class.participants.length}}</td>
+              <td><button  type="button" (click) = "subscribeToClass(class.id)" *ngIf="class.maxPeople > class.participants.length && class.participants.indexOf(userEmail) == -1; else subButtonTemplate">Jelentkezés</button></td>
+              <ng-template #subButtonTemplate>
+                <button  type="button" *ngIf="class.participants.indexOf(userEmail) > -1; else subButton2Template" style="background-color:green;">Jelentkezve</button>
+              </ng-template>
+              <ng-template #subButton2Template>
+                <button  type="button" *ngIf="class.maxPeople > class.participants.length; " style="background-color:red;">Megtelt</button>
+              </ng-template>
+          </tr>
+      </tbody>  
+  </table>
+</div>
+<ng-template #noClassesTemplate>
+  <div class="subtext">
+    <p>Nincs meghirdetett fitnessz óra.</p>
+  </div>
+</ng-template>
+<div class="logo">
+  <img  src="/assets/logo.png" alt="logo">
+</div>

@@ -1,0 +1,33 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+app-root {
+    width: 100%;
+}
+
+.subtext {
+    width: 100%;
+    text-align: center;
+    top: 10px;
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #1e4652;   
+}
+
+.logo {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+
+  }
+  .logo img{
+    height: 200px;
+    width: 200px;
+  }
+
+html { background-color: lightyellow; }

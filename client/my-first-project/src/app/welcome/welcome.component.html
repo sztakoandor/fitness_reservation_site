@@ -1,0 +1,14 @@
+<div class="topnav">
+  <a class="active" (click)="navigate('/welcome')">Home</a>
+  <a (click)="navigate('/subscriptions')">Foglalásaim</a>
+  <a (click)="navigate('/calendar')">Fitnessz alkalmak</a>
+  <a *ngIf="isAdmin == 'true'" (click)="navigate('/user-management')">Felhasználók kezelése</a>
+  <a *ngIf="isAdmin == 'true'" (click)="navigate('/class-management')">Fitnessz órák kezelése</a>
+  <a style="float: right;" (click)="logout()">Kijelentkezés</a>
+</div> 
+<div class="cimsor">
+  <p>Üdvözlünk az xyFitnessz időpontfoglaló felüleltén!</p>
+</div >
+<div class="logo">
+  <img  src="/assets/logo.png" alt="logo">
+</div>
