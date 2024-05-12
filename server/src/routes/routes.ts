@@ -171,7 +171,7 @@ export const configureRoutes = (passport: PassportStatic, router: Router): Route
     //create class
     router.post('/createClass', (req: Request, res: Response) => {//n st d n n
         const id = req.body.id;
-        const participants = req.body.participants;
+        const participants: string[] = [];
         const start = new Date(req.body.start);
         const duration = req.body.duration;
         const maxPeople = req.body.maxPeople;

@@ -13,15 +13,19 @@
               <th>Időpont</th>
               <th>Típus</th>
               <th>Leírás</th>
+              <th>Hossz</th>
+              <th>Nehézség</th>
               <th>Létszám</th>
               <th>Leiratkozás</th>
           </tr>
       </thead>
       <tbody>
           <tr *ngFor="let class of classes">
-              <td>{{class.start}}</td>
+              <td>{{class.start.toLocaleString("hu-HU")}}</td>
               <td>{{class.type}}</td>
               <td>{{class.description}}</td>
+              <td>{{class.duration}} óra</td>
+              <td>{{class.difficulty}}</td>
               <td>{{class.maxPeople}} / {{class.participants.length}}</td>
               <td><button  type="button" (click) = "unsubscribe(class.id)">Lejelentkezés</button></td>
           </tr>

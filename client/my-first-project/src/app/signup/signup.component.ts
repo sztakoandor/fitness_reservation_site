@@ -2,6 +2,7 @@ import { CommonModule, Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../shared/services/auth.service';
+import { Router, RouterModule } from '@angular/router';
 
 // FormsModule, ReactiveFormsModule
 
@@ -18,7 +19,8 @@ export class SignupComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private location: Location,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -51,12 +53,16 @@ export class SignupComponent implements OnInit {
     }
   }
 
+  navigate(to: string) {
+    this.router.navigateByUrl(to);
+  }
   onSubmit() {
     if (this.signupForm.valid) {
       console.log('Form data:', this.signupForm.value);
       this.authService.register(this.signupForm.value).subscribe({
         next: (data) => {
           console.log(data);
+          this.navigate("/login");
         }, error: (err) => {
           console.log(err);
         }

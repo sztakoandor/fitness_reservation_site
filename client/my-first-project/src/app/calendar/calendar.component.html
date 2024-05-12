@@ -13,19 +13,23 @@
               <th>Időpont</th>
               <th>Típus</th>
               <th>Leírás</th>
+              <th>Hossz</th>
+              <th>Nehézség</th>
               <th>Létszám</th>
               <th>Feliratkozás</th>
           </tr>
       </thead>
       <tbody>
           <tr *ngFor="let class of classes">
-              <td>{{class.start}}</td>
+              <td>{{class.start.toLocaleString("hu-HU")}}</td>
               <td>{{class.type}}</td>
               <td>{{class.description}}</td>
+              <td>{{class.duration}} óra</td>
+              <td>{{class.difficulty}}</td>
               <td>{{class.maxPeople}} / {{class.participants.length}}</td>
               <td><button  type="button" (click) = "subscribeToClass(class.id)" *ngIf="class.maxPeople > class.participants.length && class.participants.indexOf(userEmail) == -1; else subButtonTemplate">Jelentkezés</button></td>
               <ng-template #subButtonTemplate>
-                <button  type="button" *ngIf="class.participants.indexOf(userEmail) > -1; else subButton2Template" style="background-color:green;">Jelentkezve</button>
+                <button  type="button" *ngIf="class.participants.indexOf(userEmail) > -1 else subButton2Template;" style="background-color:green;">Jelentkezve</button>
               </ng-template>
               <ng-template #subButton2Template>
                 <button  type="button" *ngIf="class.maxPeople > class.participants.length; " style="background-color:red;">Megtelt</button>

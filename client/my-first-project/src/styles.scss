@@ -4,6 +4,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
+    margin: 0;    
 }
 
 app-root {
@@ -19,6 +21,14 @@ app-root {
     color: #1e4652;   
 }
 
+.buttons2{
+  width: 100%;
+  align-content: center;
+  align-items: center;
+  align-self: center;
+  text-align: center; 
+}
+
 .logo {
     position: fixed;
     bottom: 0px;
@@ -29,5 +39,6 @@ app-root {
     height: 200px;
     width: 200px;
   }
+
 
 html { background-color: lightyellow; }

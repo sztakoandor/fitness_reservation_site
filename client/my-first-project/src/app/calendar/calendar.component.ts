@@ -27,7 +27,11 @@ export class CalendarComponent {
     this.classes = [];
     this.classService.getAll().subscribe({
       next: (data) => {
-        this.classes = data;
+        data.forEach(element => {
+            element.start = new Date(element.start);
+            this.classes?.push(element);  
+            console.log(element);
+        });
       }, error: (err) => {
         console.log(err);
       }

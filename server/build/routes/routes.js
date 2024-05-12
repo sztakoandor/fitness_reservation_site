@@ -169,7 +169,7 @@ const configureRoutes = (passport, router) => {
     //create class
     router.post('/createClass', (req, res) => {
         const id = req.body.id;
-        const participants = req.body.participants;
+        const participants = [];
         const start = new Date(req.body.start);
         const duration = req.body.duration;
         const maxPeople = req.body.maxPeople;

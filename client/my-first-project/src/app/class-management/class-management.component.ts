@@ -15,6 +15,7 @@ import { AfterViewInit, Component, ElementRef, ViewChild, Renderer2 } from '@ang
   styleUrl: './class-management.component.scss'
 })
 export class ClassManagementComponent {
+  createHidden: boolean;
   isAdmin: string;
   classes?: Class[];
   @ViewChild('classForm', { static: false }) classForm: ElementRef | undefined;
@@ -28,7 +29,8 @@ export class ClassManagementComponent {
     private classService: ClassService,
     private formBuilder: FormBuilder,
       ) {
-    this.isAdmin = localStorage.getItem('isAdmin') == null ? "" : localStorage.getItem('isAdmin')!;
+        this.createHidden = true;
+        this.isAdmin = localStorage.getItem('isAdmin') == null ? "" : localStorage.getItem('isAdmin')!;
   }
 
   navigate(to: string) {
@@ -39,7 +41,11 @@ export class ClassManagementComponent {
     this.classes = [];
     this.classService.getAll().subscribe({
       next: (data) => {
-        this.classes = data;
+        data.forEach(element => {
+          element.start = new Date(element.start);
+          this.classes?.push(element);  
+          console.log(element);
+      });
       }, error: (err) => {
         console.log(err);
       }
@@ -102,10 +108,12 @@ export class ClassManagementComponent {
   }
 
   openForm() {
+    this.createHidden = false;
     this.renderer.setStyle(this.classForm?.nativeElement, 'display', 'block');
 
   }
   closeForm() {
+    this.createHidden = true;
     this.renderer.setStyle(this.classForm?.nativeElement, 'display', 'none');
   }
 

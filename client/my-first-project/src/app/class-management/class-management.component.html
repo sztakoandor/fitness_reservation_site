@@ -13,15 +13,19 @@
               <th>Időpont</th>
               <th>Típus</th>
               <th>Leírás</th>
+              <th>Hossz</th>
+              <th>Nehézség</th>
               <th>Létszám</th>
               <th>Törlés</th>
           </tr>
       </thead>
       <tbody>
           <tr *ngFor="let class of classes">
-              <td>{{class.start}}</td>
+              <td>{{class.start.toLocaleString("hu-HU")}}</td>
               <td>{{class.type}}</td>
               <td>{{class.description}}</td>
+              <td>{{class.duration}} óra</td>
+              <td>{{class.difficulty}}</td>
               <td>{{class.maxPeople}} / {{class.participants.length}}</td>
               <td><button  type="button" (click) = "deleteClass(class.id)">Törlés</button></td>
           </tr>
@@ -34,19 +38,28 @@
   </div>
 </ng-template>
  <!-- A button to open the popup form -->
- <button class="open-button" (click)="openForm()">Óra felvétel</button>
+ <button class="open-button" (click)="createHidden? openForm() : closeForm()">Óra felvétel</button>
  <!-- The form -->
  <div class="form-popup" style="display: none;"  #classForm>
   <form class="form-container" [formGroup]="makeClassForm" (ngSubmit)="classSubmit()">
-    <label for="start">Kezdés időpontja</label>
-    <input formControlName="start" type="datetime-local" placeholder="Kezdés dátuma" required id = "start"/>
-    <input formControlName="duration" type="number" placeholder="Tervezett hossz (óra)" required/>
-    <input formControlName="maxPeople" type="number" placeholder="Férőhelyek" required/>
-    <input formControlName="description" type="text" placeholder="Leírás" required/>
-    <input type="radio" formControlName="difficulty" value="Kezdő" /> Kezdő
-    <input type="radio" formControlName="difficulty" value="Haladó" /> Haladó
-    <input type="radio" formControlName="difficulty" value="Nehéz" /> Nehéz
-    <input formControlName="type" type="text" placeholder="Óra típusa (pl.: Aerobic)" required/>
+    <label for="start">Kezdés időpontja:</label>
+    <input formControlName="start" type="datetime-local" placeholder="Kezdés dátuma" required id = "start" min="2024-05-12T00:00"/>
+    <label for="duration">Alkalom tervezett hossza, órában:</label>
+    <input formControlName="duration" type="number" placeholder=1 required id = "duration" min="1" max="10"/>
+    <label for="maxPeople">Maximum tervezett létszám:</label>
+    <input formControlName="maxPeople" type="number" placeholder="Férőhelyek" required id = "maxPeople "min="1" max="100"/>
+    <label for="description">Leírás:</label>
+    <input formControlName="description" type="text" placeholder="Leírás" required id = "description"/>
+    <label for="difficulty">Edzés nehézsége:</label>
+    <input type="radio" formControlName="difficulty" value="Kezdő" id = "difficulty"/> Kezdő
+    <input type="radio" formControlName="difficulty" value="Haladó" id = "difficulty"/> Haladó
+    <input type="radio" formControlName="difficulty" value="Nehéz" id = "difficulty"/> Nehéz
+    <br>
+    <br>
+    <label for="type">Edzés típusa:</label>
+    <input formControlName="type" type="text" placeholder="Óra típusa (pl.: Aerobic)" required id = "type"/>
+    <br>
+    <br>
     <div class="buttons">
       <button type="submit">Létrehozás</button>
     </div>

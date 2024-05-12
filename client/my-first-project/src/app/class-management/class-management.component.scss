@@ -40,3 +40,61 @@
   nonedisplay {
     display: none;
   }
+
+  
+table {
+  width: 100%;
+  margin-top: 20px;
+}
+
+th, td {
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #bbbbbb;
+    color: #333;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.table-container {
+    margin: 20px;
+}
+
+.open-button{
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  align-self: center;
+  text-align: center; 
+}
+
+.form-popup{
+  vertical-align: center;
+  padding: 30px;
+  border-radius: 40px;
+  box-shadow: 10px 10px 8px #888888;
+  position: absolute;
+  top: 25%;
+  bottom: 25%;
+  left: 35%;
+  right: 35%;
+  width: 30%;
+  height: 50%;
+  background-color: #04AA6D;
+  z-index: 10;
+  
+  align-items: center;
+  align-self: center;
+  align-content: center;
+}
+.form-popup label{
+  width: 100%;
+}
+.form-popup input{
+  width: 100%;
+}

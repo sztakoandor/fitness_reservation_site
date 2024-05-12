@@ -31,7 +31,9 @@ export class SubscriptionsComponent {
       next: (data) => {
         data.forEach(element => {
           if (element.participants.indexOf(this.userEmail) > -1){
-            this.classes?.push(element);
+            element.start = new Date(element.start);
+            this.classes?.push(element);  
+            console.log(element);
           }
         });
       }, error: (err) => {
@@ -68,5 +70,6 @@ export class SubscriptionsComponent {
 
   ngOnInit() {
     this.refreshClassesTb();
+    
   }
 }

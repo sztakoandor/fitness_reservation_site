@@ -26,11 +26,11 @@
                 <td>{{user.address}}</td>
                 <td>{{user.nickname}}</td>
                 <td>{{user.admin}}</td>
-                <td><button  type="button" (click) = "changeAdmin(user.email, true)" *ngIf="user.admin == false; else subButtonTemplate">Make Admin</button></td>
+                <td><button style="width: fit-content;" type="button" (click) = "changeAdmin(user.email, true)" *ngIf="user.admin == false; else subButtonTemplate">Make Admin</button></td>
                 <ng-template #subButtonTemplate>
-                <td><button  type="button" (click) = "changeAdmin(user.email, false)">Remove Admin</button></td>
+                <td><button  style="width: fit-content;" type="button" (click) = "changeAdmin(user.email, false)">Remove Admin</button></td>
                 </ng-template>
-                <td><button  type="button" (click) = "deleteUser(user.email)" >Delete account</button></td>
+                <td><button  style="width: fit-content;" type="button" (click) = "deleteUser(user.email)" >Delete account</button></td>
             </tr>   
         </tbody>
     </table>
