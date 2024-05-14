@@ -1,0 +1,1 @@
+Ismert hiba: a routes.ts-en belül, az "/unsibscribe" megvalósításában van egy "if(index)" vizsgálat, ami miatt az első (0.) Fitnessz alkalomra feljelentkezett felhasználó nem tud lejelentkezni. A feltételvizsgálat nélkül minden jól működik. (ekkor a következő két sorba !index kell).
